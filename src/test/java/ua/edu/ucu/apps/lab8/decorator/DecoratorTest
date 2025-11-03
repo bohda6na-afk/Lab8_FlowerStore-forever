@@ -1,0 +1,68 @@
+package ua.edu.ucu.apps.lab8.decorator;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import ua.edu.ucu.apps.lab8.model.Item;
+
+class DecoratorTest {
+
+    @Test
+    void testPaperDecorator() {
+        Item flower = new CactusFlower();
+        assertEquals(50.0, flower.price());
+        
+        Item decorated = new PaperDecorator(flower);
+        assertEquals(63.0, decorated.price());
+        assertTrue(decorated.getDescription().contains("wrapped in paper"));
+    }
+
+    @Test
+    void testBasketDecorator() {
+        Item flower = new RomashkaFlower();
+        assertEquals(100.0, flower.price());
+        
+        Item decorated = new BasketDecorator(flower);
+        assertEquals(104.0, decorated.price());
+        assertTrue(decorated.getDescription().contains("placed in a basket"));
+    }
+
+    @Test
+    void testRibbonDecorator() {
+        Item flower = new CactusFlower();
+        assertEquals(50.0, flower.price());
+        
+        Item decorated = new RibbonDecorator(flower);
+        assertEquals(90.0, decorated.price());
+        assertTrue(decorated.getDescription().contains("decorated with ribbon"));
+    }
+
+    @Test
+    void testMultipleDecorators() {
+        Item flower = new CactusFlower();
+        
+        Item decorated = new PaperDecorator(
+            new BasketDecorator(
+                new RibbonDecorator(flower)
+            )
+        );
+        
+        assertEquals(107.0, decorated.price());
+        
+        String description = decorated.getDescription();
+        assertTrue(description.contains("Cactus flower"));
+        assertTrue(description.contains("ribbon"));
+        assertTrue(description.contains("basket"));
+        assertTrue(description.contains("paper"));
+    }
+
+    @Test
+    void testDecoratorOrder() {
+        Item flower = new RomashkaFlower();
+        
+        Item option1 = new RibbonDecorator(new PaperDecorator(flower));
+        Item option2 = new PaperDecorator(new RibbonDecorator(flower));
+        
+        assertEquals(option1.price(), option2.price());
+        assertEquals(153.0, option1.price());
+    }
+}

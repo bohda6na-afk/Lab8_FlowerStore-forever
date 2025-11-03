@@ -1,0 +1,5 @@
+package ua.edu.ucu.apps.lab8.strategy.payment;
+
+public interface Payment {
+    void pay(double price);
+}

@@ -1,0 +1,31 @@
+GET http://localhost:8080/api/v1/flower
+
+POST http://localhost:8080/api/v1/flower
+Content-Type: application/json
+
+{
+  "flowerType": "Rose",
+  "flowerColor": "Red",
+  "price": 150.0,
+  "available": true
+}
+
+POST http://localhost:8080/api/v1/flower
+Content-Type: application/json
+
+{
+  "flowerType": "Tulip",
+  "flowerColor": "Yellow",
+  "price": 80.0,
+  "available": true
+}
+
+POST http://localhost:8080/api/v1/flower
+Content-Type: application/json
+
+{
+  "flowerType": "Orchid",
+  "flowerColor": "Purple",
+  "price": 200.0,
+  "available": false
+}
